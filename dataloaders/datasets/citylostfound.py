@@ -3,10 +3,10 @@ import numpy as np
 import cv2
 from PIL import Image
 from torch.utils import data
-from mypath import Path
+from RFnet.mypath import Path
 from torchvision import transforms
-from dataloaders import custom_transforms as tr
-from dataloaders import custom_transforms_rgb as tr_rgb
+from RFnet.dataloaders import custom_transforms as tr
+from RFnet.dataloaders import custom_transforms_rgb as tr_rgb
 
 class CitylostfoundSegmentation(data.Dataset):
     NUM_CLASSES = 20
