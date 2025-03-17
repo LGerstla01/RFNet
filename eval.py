@@ -1,3 +1,5 @@
+import sys
+sys.path.append('/home/car/ros2_ws/src/obstacle_detection/obstacle_detection/')
 import argparse
 import os
 import numpy as np
@@ -13,6 +15,7 @@ from utils.metrics import Evaluator
 from models.rfnet import RFNet
 from models.resnet.resnet_single_scale_single_attention import *
 import torch.backends.cudnn as cudnn
+
 
 class Validator(object):
     def __init__(self, args):
@@ -39,7 +42,7 @@ class Validator(object):
 
         # Load weights
         assert os.path.exists(args.weight_path), 'weight-path:{} doesn\'t exit!'.format(args.weight_path)
-        self.new_state_dict = torch.load(os.path.join(args.weight_path, 'model_best.pth'))
+        self.new_state_dict = torch.load(os.path.join(args.weight_path, 'model_best.pth'), weights_only=False)
 
         self.model = load_my_state_dict(self.model.module, self.new_state_dict['state_dict'])
 
@@ -117,7 +120,10 @@ def load_my_state_dict(model, state_dict):  # custom function to load model when
             print('{} not in model_state'.format(name))
             continue
         else:
-            own_state[name].copy_(param)
+            if own_state[name].size() == param.size():
+                own_state[name].copy_(param)
+            else:
+                print('Skipping parameter {} due to size mismatch: model size {}, checkpoint size {}'.format(name, own_state[name].size(), param.size()))
 
     return model
 
@@ -146,7 +152,7 @@ def main():
                         comma-separated list of integers only (default=0)')
     parser.add_argument('--checkname', type=str, default=None,
                         help='set the checkpoint name')
-    parser.add_argument('--weight-path', type=str, default=None,
+    parser.add_argument('--weight-path', type=str, default='/home/car/ros2_ws/src/obstacle_detection/obstacle_detection/RFnet/',
                         help='enter your path of the weight')
     parser.add_argument('--label-save-path', type=str, default='E:/RFNet/test/label/',
                         help='path to save label')
