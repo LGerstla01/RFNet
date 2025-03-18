@@ -84,3 +84,6 @@ Edit path to your dataset in `mypath.py`.
 `python eval.py --dataset citylostfound --weight-path your/path/to/weight/ --depth`
 
 *Note: The code is partially based [Swiftnet](https://github.com/orsic/swiftnet) and [DeepLab v3+](https://github.com/jfzhang95/pytorch-deeplab-xception).*
+
+## Class Coloring
+![image](https://github.com/user-attachments/assets/2ce49c7c-9b77-4fc9-953e-2c57c007de0c)
