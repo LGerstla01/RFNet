@@ -1,4 +1,4 @@
-from RFnet.dataloaders.datasets import cityscapes, citylostfound
+from obstacle_detection.RFnet.dataloaders.datasets import cityscapes, citylostfound
 from torch.utils.data import DataLoader
 
 def make_data_loader(args, **kwargs):

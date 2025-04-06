@@ -3,9 +3,9 @@ import numpy as np
 import scipy.misc as m
 from PIL import Image
 from torch.utils import data
-from RFnet.mypath import Path
+from obstacle_detection.RFnet.mypath import Path
 from torchvision import transforms
-from RFnet.dataloaders import custom_transforms as tr
+from obstacle_detection.RFnet.dataloaders import custom_transforms as tr
 
 class CityscapesSegmentation(data.Dataset):
     NUM_CLASSES = 19
